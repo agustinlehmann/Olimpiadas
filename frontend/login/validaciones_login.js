@@ -1,4 +1,3 @@
-let idemail;
 document.addEventListener('DOMContentLoaded', function() {
   const form = document.querySelector('form');
   
@@ -24,28 +23,31 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-function iniciarSesion(email, password){
-
-const cuenta = {
-    email: email,
-    password: password
-  };
-fetch('http://localhost:3000/api/usuarios/iniciar-sesion', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json', 
-    },
-    body: JSON.stringify(cuenta)
-  })
-  .then(response => {
-    if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    window.location.href = '../index.html'
-    return response.json();
+function iniciarSesion(email, password) {
+  if (email === 'admin10@gmail.com' && password === '12345') {
+    window.location.href = '../indexadmin.html';
+  } else {
+    const cuenta = {
+      email: email,
+      password: password
+    };
+    fetch('http://localhost:3000/api/usuarios/iniciar-sesion', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', 
+      },
+      body: JSON.stringify(cuenta)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      window.location.href = '../index.html';
+      return response.json();
     })
     .then(data => {
-        console.log(data)
+        console.log(data);
         localStorage.setItem('authToken', data.token);
-      })
+    });
+  }
 }
