@@ -26,4 +26,7 @@ async function conectarBD() {
 }
 
 module.exports = { bd, conectarBD };
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5c3f557792a8b58c1764f3159d2b3eac6ac6063c
