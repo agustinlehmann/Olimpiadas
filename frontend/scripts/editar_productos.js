@@ -72,26 +72,70 @@ function eliminar(id2) {
 }
 
 function actualizar(id2, div) {
+    // Crear elementos del formulario
+    const form = document.createElement('form');
+    form.className = 'p-4 border rounded bg-light shadow-lg mx-auto'; // Clases de Bootstrap para estilo
+
+    // Añadir contenedor con ancho máximo
+    const container = document.createElement('div');
+    container.className = 'container'; // Añadido para controlar el ancho
+    form.appendChild(container);
+
+    // Nombre del producto
+    const nombreGroup = document.createElement('div');
+    nombreGroup.className = 'mb-3';
+    const nombreLabel = document.createElement('label');
+    nombreLabel.className = 'form-label';
+    nombreLabel.textContent = 'Nombre del producto';
     const nombre = document.createElement('input');
-    const precio = document.createElement('input');
-    const cantidad = document.createElement('input');
-    const boton = document.createElement('button');
-
     nombre.type = 'text';
-    nombre.placeholder = 'Nombre del producto';
+    nombre.className = 'form-control'; // Clase de Bootstrap para inputs
+    nombreGroup.appendChild(nombreLabel);
+    nombreGroup.appendChild(nombre);
+
+    // Precio del producto
+    const precioGroup = document.createElement('div');
+    precioGroup.className = 'mb-3';
+    const precioLabel = document.createElement('label');
+    precioLabel.className = 'form-label';
+    precioLabel.textContent = 'Precio del producto';
+    const precio = document.createElement('input');
     precio.type = 'number';
-    precio.placeholder = 'Precio del producto';
+    precio.className = 'form-control'; // Clase de Bootstrap para inputs
+    precioGroup.appendChild(precioLabel);
+    precioGroup.appendChild(precio);
+
+    // Cantidad del producto
+    const cantidadGroup = document.createElement('div');
+    cantidadGroup.className = 'mb-3';
+    const cantidadLabel = document.createElement('label');
+    cantidadLabel.className = 'form-label';
+    cantidadLabel.textContent = 'Stock del producto';
+    const cantidad = document.createElement('input');
     cantidad.type = 'number';
-    cantidad.placeholder = 'Stock del producto';
+    cantidad.className = 'form-control'; // Clase de Bootstrap para inputs
+    cantidadGroup.appendChild(cantidadLabel);
+    cantidadGroup.appendChild(cantidad);
 
-    boton.type = "submit";
+    // Botón de actualización
+    const botonGroup = document.createElement('div');
+    botonGroup.className = 'd-flex justify-content-end';
+    const boton = document.createElement('button');
+    boton.type = 'submit';
+    boton.className = 'btn btn-primary'; // Clase de Bootstrap para botones
     boton.textContent = 'Actualizar';
+    botonGroup.appendChild(boton);
 
-    div.appendChild(nombre);
-    div.appendChild(precio);
-    div.appendChild(cantidad);
-    div.appendChild(boton);
+    // Añadir grupos al contenedor
+    container.appendChild(nombreGroup);
+    container.appendChild(precioGroup);
+    container.appendChild(cantidadGroup);
+    container.appendChild(botonGroup);
 
+    // Añadir contenedor al div principal
+    div.appendChild(form);
+
+    // Manejador del evento click para el botón
     boton.addEventListener('click', (event) => {
         event.preventDefault(); // Para evitar el comportamiento predeterminado del botón de formulario
         const producto = {};
@@ -104,6 +148,8 @@ function actualizar(id2, div) {
         div.innerHTML = ''; // Limpiar el formulario después de la actualización
     });
 }
+
+
 
 function actualizarProducto(id2, producto) {
     console.log('id ' + id2);
