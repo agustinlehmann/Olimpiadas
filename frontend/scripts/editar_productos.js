@@ -3,7 +3,7 @@ const agregarcosas = document.getElementById('agregarcosas');
 fetch('http://localhost:3000/api/productos', {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
     }
 })
     .then(response => {
@@ -34,82 +34,91 @@ fetch('http://localhost:3000/api/productos', {
                         </form>
                     </div>
                 </div>`).join('');
-          for (let key in data){
-            const boton1 = document.getElementById('a'+data[key].id_producto)
-            const boton2 = document.getElementById('b'+data[key].id_producto)
-            const divasd = document.getElementById('asd'+data[key].id_producto)
-            console.log(boton1)
-            console.log(boton2)
-            let id = Number(data[key].id_producto);
-            boton1.addEventListener('click', ()=>actualizar(id, divasd))
-            boton2.addEventListener("click", ()=>eliminar(id))
-          }
-    })
 
+        for (let key in data) {
+            const boton1 = document.getElementById('a' + data[key].id_producto);
+            const boton2 = document.getElementById('b' + data[key].id_producto);
+            const divasd = document.getElementById('asd' + data[key].id_producto);
+
+            boton1.addEventListener('click', (event) => {
+                event.preventDefault(); // Para evitar el comportamiento predeterminado del enlace
+                actualizar(data[key].id_producto, divasd);
+            });
+            boton2.addEventListener('click', (event) => {
+                event.preventDefault(); // Para evitar el comportamiento predeterminado del enlace
+                eliminar(data[key].id_producto);
+            });
+        }
+    })
     .catch(error => {
         console.error('Error:', error);
     });
 
-
-function eliminar(id2){
-    console.log('id '+id2)
-    fetch('http://localhost:3000/api/productos/'+id2, {
-    method: 'DELETE',
-    headers: {
-        'Content-Type': 'application/json',
-    },
+function eliminar(id2) {
+    console.log('id ' + id2);
+    fetch('http://localhost:3000/api/productos/' + id2, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data)
-        console.log('Eliminado correctamente')
+        console.log(data);
+        console.log('Eliminado correctamente');
         location.reload();
     })
     .catch(error => console.error(error));
 }
 
-function actualizar(id2, div){
+function actualizar(id2, div) {
     const nombre = document.createElement('input');
     const precio = document.createElement('input');
     const cantidad = document.createElement('input');
     const boton = document.createElement('button');
+
     nombre.type = 'text';
     nombre.placeholder = 'Nombre del producto';
     precio.type = 'number';
     precio.placeholder = 'Precio del producto';
     cantidad.type = 'number';
     cantidad.placeholder = 'Stock del producto';
-    boton.type="submit";
+
+    boton.type = "submit";
     boton.textContent = 'Actualizar';
+
     div.appendChild(nombre);
     div.appendChild(precio);
     div.appendChild(cantidad);
     div.appendChild(boton);
-    boton.addEventListener('click', ()=>{
-        const precio2 = parseInt(precio.value)
-        const cantidad2 = parseInt(cantidad.value)
-        actualizarProducto(id2, nombre.value, precio2, cantidad2);
-        div.innerHTML = '';
+
+    boton.addEventListener('click', (event) => {
+        event.preventDefault(); // Para evitar el comportamiento predeterminado del botón de formulario
+        const producto = {};
+
+        if (nombre.value.trim() !== '') producto.nombre_producto = nombre.value;
+        if (precio.value.trim() !== '') producto.precio = parseFloat(precio.value);
+        if (cantidad.value.trim() !== '') producto.stock = parseInt(cantidad.value);
+
+        actualizarProducto(id2, producto);
+        div.innerHTML = ''; // Limpiar el formulario después de la actualización
     });
 }
-function actualizarProducto(id2, nombre, precio2, cantidad){
-    const producto = {
-        nombre_producto: nombre,
-        precio: precio2,
-        stock: cantidad,
-      }
-    console.log('id '+id2)
-    fetch('http://localhost:3000/api/productos/'+id2, {
-    method: 'PUT',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(producto),
+
+function actualizarProducto(id2, producto) {
+    console.log('id ' + id2);
+
+    fetch('http://localhost:3000/api/productos/' + id2, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(producto),
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data)
-        console.log('Actualizado correctamente')
+        console.log(data);
+        console.log('Actualizado correctamente');
         location.reload();
     })
     .catch(error => console.error(error));

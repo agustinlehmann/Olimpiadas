@@ -59,13 +59,13 @@
     .btn-primary:hover {
       background-color: #2980b9;
     }
-    .signup-link {
+    .signup-link, .signin-link {
       color: #ecf0f1;
       text-decoration: none;
       font-size: 14px;
       margin-top: 10px;
     }
-    .signup-link:hover {
+    .signup-link:hover, .signin-link:hover {
       text-decoration: underline;
     }
     @keyframes fadeIn {
@@ -95,7 +95,7 @@
         <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña" required>
       </div>
       <div class="form-group">
-        <label for="password">Confirmar Contraseña</label>
+        <label for="password_confirm">Confirmar Contraseña</label>
         <input type="password" class="form-control" id="password_confirm" placeholder="Confirme su contraseña" required>
       </div>
       <div class="form-group">
@@ -104,6 +104,7 @@
       </div>
       <button type="submit" id="registrarse" class="btn btn-primary">Registrarse</button>
     </form>
+    <a href="login.html" class="signin-link">¿Ya tienes una cuenta? Inicia sesión aquí</a>
     <img src="../img/logo.png" alt="Logo">
   </div>
 
