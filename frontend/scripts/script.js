@@ -38,5 +38,6 @@ function botoncomprar(){
     });
     });
 }
-setTimeout(botoncomprar, 100)
+//botoncomprar()
+ setTimeout(botoncomprar, 4000)
 updateCart();
