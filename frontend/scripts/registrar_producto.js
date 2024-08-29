@@ -39,7 +39,7 @@ const producto = {
     stock: cantidad,
   }
   
-  fetch('http://localhost:3000/api/productos', {
+  fetch('https://solofutbol-api.vercel.app/api/productos', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
