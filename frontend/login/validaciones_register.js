@@ -53,7 +53,7 @@ function registrar(name, mail, pass, dir) {
       direccion: dir
   };
 
-  fetch('http://localhost:3000/api/usuarios', {
+  fetch('https://solofutbol-api.vercel.app/api/usuarios', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
