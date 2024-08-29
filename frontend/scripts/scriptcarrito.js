@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function validarToken(token) {
-        fetch('http://localhost:3000/api/usuarios/validar', {
+        fetch('https://solofutbol-api.vercel.app/api/usuarios/validar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function crearPedido(pedido) {
         console.log(pedido);
-        fetch('http://localhost:3000/api/pedidos', {
+        fetch('https://solofutbol-api.vercel.app/api/pedidos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
