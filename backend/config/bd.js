@@ -1,9 +1,22 @@
 const { Sequelize } = require('sequelize');
+const {pg}= require('pg');
+const {config} = require("dotenv")
+config();
 
 // Configuración de la base de datos
-const bd = new Sequelize('ecommerce', 'root', '', {
-  host: 'localhost',
-  dialect: 'mysql'
+const  bd= new Sequelize({
+  username: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DATABASE,
+  host: process.env.POSTGRES_HOST,
+  dialectModule: pg,
+  dialect: "postgres",
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
 });
 
 async function conectarBD() {
