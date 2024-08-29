@@ -1,6 +1,6 @@
 const agregarcosas = document.getElementById('agregarcosas');
 
-fetch('http://localhost:3000/api/productos', {
+fetch('https://solofutbol-api.vercel.app/api/productos', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
